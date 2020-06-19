@@ -1,0 +1,26 @@
+<job>
+<script language="VBScript" src="VBS-MS-Office-App-Creator/create-MS-Office-app.vbs" />
+<script language="VBScript">
+
+   option explicit
+
+   dim wsh
+   set wsh = createObject("WScript.Shell")
+
+   dim path
+   path = wsh.environment("volatile")("appdata") & "\Microsoft\Excel\XLSTART\Personal.xlsb"
+
+   wscript.echo(path)
+
+   dim app
+   dim xls
+   set xls = createOfficeApp("excel", path)
+   set app = xls.application
+
+   call insertModule              (app, currentDir() & "functionality.bas", "functionality", 1)
+   call insertModule              (app, currentDir() & "VBA.bas"          , "WinAPI"       , 1)
+   call replaceThisWorksheetModule(app, currentDir() & "thisWorkbook.bas"                     )
+
+   xls.save
+
+</script> </job>

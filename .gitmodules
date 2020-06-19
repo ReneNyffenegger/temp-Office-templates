@@ -1,3 +1,6 @@
 [submodule "runVBAFilesInOffice"]
 	path = runVBAFilesInOffice
 	url = https://github.com/ReneNyffenegger/runVBAFilesInOffice
+[submodule "VBS-MS-Office-App-Creator"]
+	path = VBS-MS-Office-App-Creator
+	url = https://github.com/ReneNyffenegger/VBS-MS-Office-App-Creator
