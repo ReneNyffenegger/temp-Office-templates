@@ -1,0 +1,3 @@
+[submodule "runVBAFilesInOffice"]
+	path = runVBAFilesInOffice
+	url = https://github.com/ReneNyffenegger/runVBAFilesInOffice
