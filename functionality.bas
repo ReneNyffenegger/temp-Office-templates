@@ -1,6 +1,25 @@
 option explicit
 
+sub addReferenceToPersonalXlsb() ' {
+ '
+ '  run "personal.xlsb!addReferenceToPersonalXlsb"
+ '
+ '  application.VBE.activeVBProject.references.AddFromFile "C:\Users\r.nyffenegger\AppData\Roaming\Microsoft\Excel\XLSTART\Personal.xlsb"
+    application.VBE.activeVBProject.references.AddFromFile environ$("appdata") & "\Microsoft\Excel\XLSTART\Personal.xlsb"
+end sub ' }
+
+sub removeReferenceToPersonalXlsb() ' {
+    application.VBE.activeVBProject.references.remove application.VBE.ActiveVBProject.References("Personal_xlsb")
+end sub ' }
+
 sub copyCellWithoutNewLine() ' {
+ '
+ '  This sub copies the value of the currenlty selected cell (activeCell) into
+ '  the clipboard WITHOUT also adding the (imho unnecessary) new line.
+ '
+ '  This sub is triggered by ctrl-q  ( See thisWorkbook.bas )
+ '
+
  '
  '  https://renenyffenegger.ch/notes/development/languages/VBA/Win-API/examples/clipboard/index#vba-winapi-put-text-into-clipboard
  '
@@ -16,10 +35,9 @@ sub copyCellWithoutNewLine() ' {
    dim lockedMemory    as long
    dim text4clipboard  as string
 
-'  text4clipboard = "This text was placed into the clipboard via VBA"
    text4clipboard = activeCell.value
 
-   memory       = GlobalAlloc(GHND, len(text4clipboard) + 1)
+   memory = GlobalAlloc(GHND, len(text4clipboard) + 1)
    if memory = 0 then
       msgBox "GlobalAlloc failed"
       exit sub
@@ -50,3 +68,13 @@ sub copyCellWithoutNewLine() ' {
 
 end sub ' }
 
+sub addModule() ' {
+ '
+ '  Add a VBA module to the current project
+ '
+    application.VBE.activeVBProject.vbComponents.add(vbext_ct_StdModule)
+end sub ' }
+
+sub removeModule(nameOrNum as variant) ' {
+    application.VBE.ActiveVBProject.VBComponents.Remove application.VBE.ActiveVBProject.VBComponents(nameOrNum)
+end sub ' }

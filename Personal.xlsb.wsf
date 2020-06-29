@@ -21,6 +21,11 @@
    call insertModule              (app, currentDir() & "VBA.bas"          , "WinAPI"       , 1)
    call replaceThisWorksheetModule(app, currentDir() & "thisWorkbook.bas"                     )
 
+   app.VBE.activeVBProject.name = "Personal_xlsb"
+
+   app.activeWindow.visible = false
+
    xls.save
+   app.quit
 
 </script> </job>
