@@ -2,9 +2,10 @@ option explicit
 
 sub addReferenceToPersonalXlsb() ' {
  '
+ '  Keyboard shortcut that is assigned to this function is ctrl+F11 (see workbook_open in thisWorkbook.bas)
+ '
  '  run "personal.xlsb!addReferenceToPersonalXlsb"
  '
- '  application.VBE.activeVBProject.references.AddFromFile "C:\Users\r.nyffenegger\AppData\Roaming\Microsoft\Excel\XLSTART\Personal.xlsb"
     application.VBE.activeVBProject.references.AddFromFile environ$("appdata") & "\Microsoft\Excel\XLSTART\Personal.xlsb"
 end sub ' }
 
