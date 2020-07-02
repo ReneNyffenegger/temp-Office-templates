@@ -6,7 +6,22 @@ sub addReferenceToPersonalXlsb() ' {
  '
  '  run "personal.xlsb!addReferenceToPersonalXlsb"
  '
-    application.VBE.activeVBProject.references.AddFromFile environ$("appdata") & "\Microsoft\Excel\XLSTART\Personal.xlsb"
+
+  '
+  ' Determine if Personal_xlsb was already added:
+    on error resume next
+    dim n as string
+    n = application.VBE.activeVBProject.references("Personal_xlsb").name
+    on error goto 0
+
+    if n = "" then
+       application.VBE.activeVBProject.references.addFromFile environ$("appdata") & "\Microsoft\Excel\XLSTART\Personal.xlsb"
+    else
+       debug.print "reference to Personal.xlsb was already added"
+    end if
+ 
+'err_:
+'   msgBox err.number & ": " & err.description
 end sub ' }
 
 sub removeReferenceToPersonalXlsb() ' {
