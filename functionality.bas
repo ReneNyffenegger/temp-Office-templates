@@ -19,6 +19,8 @@ sub addReferenceToPersonalXlsb() ' {
     else
        debug.print "reference to Personal.xlsb was already added"
     end if
+
+    application.VBE.activevbProject.references.addFromGuid ("{0002E157-0000-0000-C000-000000000046}", 5, 3)
  
 'err_:
 '   msgBox err.number & ": " & err.description
@@ -91,6 +93,17 @@ sub addModule() ' {
     application.VBE.activeVBProject.vbComponents.add(vbext_ct_StdModule)
 end sub ' }
 
-sub removeModule(nameOrNum as variant) ' {
-    application.VBE.ActiveVBProject.VBComponents.Remove application.VBE.ActiveVBProject.VBComponents(nameOrNum)
+'
+'     2020-07-06: Functionality also found in 00_ModuleLoader
+'
+' sub removeModule(nameOrNum as variant) ' {
+'     application.VBE.ActiveVBProject.VBComponents.Remove application.VBE.ActiveVBProject.VBComponents(nameOrNum)
+' end sub ' }
+
+sub add_00ModuleLoader() ' {
+
+    dim mdl as vbide.vbComponent
+    set mdl = application.VBE.activeVBProject.vbComponents.import("C:\Users\r.nyffenegger\github\lib\VBAModules\Common\00_ModuleLoader.bas")
+    mdl.name = "ModuleLoader"
+
 end sub ' }
