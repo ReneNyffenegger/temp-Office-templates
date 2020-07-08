@@ -20,10 +20,24 @@ sub addReferenceToPersonalXlsb() ' {
        debug.print "reference to Personal.xlsb was already added"
     end if
 
-    application.VBE.activevbProject.references.addFromGuid ("{0002E157-0000-0000-C000-000000000046}", 5, 3)
+  '
+  ' Add reference to «Microsoft Visual Basic for Applications Extensibility 5.3»
+  '
+    on error goto errReference
+    application.VBE.activevbProject.references.addFromGuid "{0002E157-0000-0000-C000-000000000046}", 5, 3
+    exit sub
  
-'err_:
-'   msgBox err.number & ": " & err.description
+ errReference:
+
+    if err.number = 32813 then
+    '
+    '  Name conflicts with existing module, project, or object library
+
+       debug.print "reference was already added"
+    else
+       msgBox err.number & ": " & err.description
+    end if
+
 end sub ' }
 
 sub removeReferenceToPersonalXlsb() ' {
