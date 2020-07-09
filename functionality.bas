@@ -32,7 +32,7 @@ sub addReferenceToPersonalXlsb() ' {
     if err.number = 32813 then
     '
     '  Name conflicts with existing module, project, or object library
-
+    '
        debug.print "reference was already added"
     else
        msgBox err.number & ": " & err.description
@@ -107,12 +107,20 @@ sub addModule() ' {
     application.VBE.activeVBProject.vbComponents.add(vbext_ct_StdModule)
 end sub ' }
 
-'
+' {
 '     2020-07-06: Functionality also found in 00_ModuleLoader
 '
-' sub removeModule(nameOrNum as variant) ' {
+' sub removeModule(nameOrNum as variant)
 '     application.VBE.ActiveVBProject.VBComponents.Remove application.VBE.ActiveVBProject.VBComponents(nameOrNum)
 ' end sub ' }
+
+sub r1c1() ' {
+    application.referenceStyle = xlR1C1
+end sub ' }
+
+sub a1() ' {
+    application.referenceStyle = xlA1
+end sub ' }
 
 sub add_00ModuleLoader() ' {
 
