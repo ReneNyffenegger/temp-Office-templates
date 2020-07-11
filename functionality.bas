@@ -191,3 +191,8 @@ sub createTestConstellation(testFileName as string) ' {
     debug.print("main")
 
 end sub ' }
+
+sub help() ' {
+    debug.print "createTestConstellation ""p:\ath\to\file"""
+    debug.print "add_00ModuleLoader"
+end sub ' }
