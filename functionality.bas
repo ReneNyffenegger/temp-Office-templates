@@ -185,9 +185,10 @@ sub createTestConstellation(testFileName as string) ' {
     cm.insertLines 3, "sub loadTestFile()"
     cm.insertLines 4, "  loadOrReplaceModuleWithFile ""testFile"", """ & testFileName & """"
     cm.insertLines 5, "  application.run ""main"""
-    cm.insertLines 6, "end sub"
+    cm.insertLines 6, "  appActivate application.caption"
+    cm.insertLines 7, "end sub"
 
-    application.onKey "^m", "loadTestFile"
+    application.onKey "^m", activeWorkbook.name & "!loadTestFile"
 
     debug.print("end")
     debug.print("loadTestFile")
