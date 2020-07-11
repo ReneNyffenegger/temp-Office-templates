@@ -184,7 +184,10 @@ sub createTestConstellation(testFileName as string) ' {
     cm.insertLines 2, ""
     cm.insertLines 3, "sub loadTestFile()"
     cm.insertLines 4, "  loadOrReplaceModuleWithFile ""testFile"", """ & testFileName & """"
-    cm.insertLines 5, "end sub"
+    cm.insertLines 5, "  application.run ""main"""
+    cm.insertLines 6, "end sub"
+
+    application.onKey "^m", "loadTestFile"
 
     debug.print("end")
     debug.print("loadTestFile")
