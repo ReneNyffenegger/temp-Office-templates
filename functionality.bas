@@ -100,12 +100,12 @@ sub copyCellWithoutNewLine() ' {
 
 end sub ' }
 
-sub addModule() ' {
+function addModule() as vbide.vbComponent ' {
  '
  '  Add a VBA module to the current project
  '
-    application.VBE.activeVBProject.vbComponents.add(vbext_ct_StdModule)
-end sub ' }
+    set addModule = application.VBE.activeVBProject.vbComponents.add(vbext_ct_StdModule)
+end function ' }
 
 ' {
 '     2020-07-06: Functionality also found in 00_ModuleLoader
@@ -124,8 +124,70 @@ end sub ' }
 
 sub add_00ModuleLoader() ' {
 
+    if application.VBE.activeVBProject.name = "Personal_xlsb" then ' {
+       debug.print "activeVBProject = Personal.xlsb"
+       exit sub
+    end if ' }
+
+    if isModuleNamePresent("ModuleLoader") then ' {
+        debug.print "ModuleLoader was already added"
+        exit sub
+    end if ' }
+
     dim mdl as vbide.vbComponent
+
     set mdl = application.VBE.activeVBProject.vbComponents.import("C:\Users\r.nyffenegger\github\lib\VBAModules\Common\00_ModuleLoader.bas")
     mdl.name = "ModuleLoader"
+
+end sub ' }
+
+function isModuleNamePresent(moduleName as string) ' {
+
+    dim mdl as vbide.vbComponent
+
+    for each mdl in application.VBE.activeVBProject.vbComponents ' {
+
+        if mdl.name = moduleName then
+           isModuleNamePresent = true
+           exit function
+        end if 
+
+    next mdl ' }
+
+    isModuleNamePresent = false
+    
+end function ' }
+
+sub createTestConstellation(testFileName as string) ' {
+
+    if application.VBE.activeVBProject.name = "Personal_xlsb" then ' {
+       debug.print "activeVBProject = Personal.xlsb"
+       exit sub
+    end if ' }
+
+    if isModuleNamePresent("loadTestModule") then ' {
+        debug.print "loadTestModule was already added"
+        exit sub
+    end if ' }
+
+    add_00ModuleLoader 
+
+    dim mdlLoadTestFile as vbide.vbComponent
+    set mdlLoadTestFile = addModule
+    mdlLoadTestFile.name = "loadTestModule"
+
+    replace testFileName, "/", "\" ' make vim syntax highlightin happy: \\"
+
+    dim cm as vbide.codeModule
+    set cm = mdlLoadTestFile.codeModule
+    cm.insertLines 1, "option explicit"
+    cm.insertLines 2, ""
+    cm.insertLines 3, "sub loadTestFile()"
+    cm.insertLines 4, "  loadOrReplaceModuleWithFile ""testFile"", """ & testFileName & """"
+    cm.insertLines 5, "end sub"
+
+    debug.print("end")
+    debug.print("loadTestFile")
+    debug.print("main")
 
 end sub ' }
