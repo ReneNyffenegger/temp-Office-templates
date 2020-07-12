@@ -196,7 +196,14 @@ sub createTestConstellation(testFileName as string) ' {
 
 end sub ' }
 
+sub saveAsXlsm(fileName as string) ' {
+
+    activeWorkbook.saveAs fileName, xlOpenXMLWorkbookMacroEnabled
+
+end sub ' }
+
 sub help() ' {
     debug.print "createTestConstellation ""p:\ath\to\file"""
     debug.print "add_00ModuleLoader"
+    debug.print "saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"
 end sub ' }
