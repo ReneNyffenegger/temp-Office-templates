@@ -100,11 +100,25 @@ sub copyCellWithoutNewLine() ' {
 
 end sub ' }
 
-function addModule() as vbide.vbComponent ' {
+function addModule(optional subMain as boolean) as vbide.vbComponent ' {
  '
  '  Add a VBA module to the current project
  '
     set addModule = application.VBE.activeVBProject.vbComponents.add(vbext_ct_StdModule)
+
+    if subMain then ' {
+
+       dim cm as vbide.codeModule
+       set cm = addModule.codeModule
+
+       cm.insertLines 1, "option explicit"
+       cm.insertLines 2, ""
+       cm.insertLines 3, "sub main()"
+       cm.insertLines 4, ""
+       cm.insertLines 5, "end sub"
+
+    end if ' }
+
 end function ' }
 
 ' {
