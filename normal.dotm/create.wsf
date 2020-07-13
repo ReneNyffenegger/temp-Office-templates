@@ -1,0 +1,44 @@
+<job>
+<script language="VBScript" src="../VBS-MS-Office-App-Creator/create-MS-Office-app.vbs" />
+<script language="VBScript">
+
+   option explicit
+
+   dim wsh
+   set wsh = createObject("WScript.Shell")
+
+ '
+ ' Create a normal-.dotm with a dash in the file name because normal.dotm cannot be
+ ' overwritten when it is in use (which is the case when word is started with this
+ ' script)
+ '
+   dim path_, path
+   path_ = wsh.environment("volatile")("appdata") & "\Microsoft\Templates\normal-.dotm"
+   path  = wsh.environment("volatile")("appdata") & "\Microsoft\Templates\normal.dotm"
+
+   wscript.echo(path)
+
+   dim app
+   dim doc
+   set doc = createOfficeApp("word", path_)
+   set app = doc.application
+
+   call insertModule              (app, currentDir() & "functionality.bas", "functionality", 1)
+'  call insertModule              (app, currentDir() & "VBA.bas"          , "WinAPI"       , 1)
+'  call replaceThisWorksheetModule(app, currentDir() & "thisWorkbook.bas"                     )
+
+   app.VBE.activeVBProject.name = "Normal"
+
+'  app.activeWindow.visible = false
+
+   doc.save
+   app.quit
+
+   wscript.sleep 3000
+
+   if fso.fileExists(path) then
+      fso.deleteFile(path)
+   end if
+   fso.moveFile path_, path
+
+</script> </job>
