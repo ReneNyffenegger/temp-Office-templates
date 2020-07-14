@@ -216,8 +216,9 @@ sub saveAsXlsm(fileName as string) ' {
 
 end sub ' }
 
-sub help() ' {
-    debug.print "createTestConstellation ""p:\ath\to\file"""
-    debug.print "add_00ModuleLoader"
-    debug.print "saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"
+sub hlp() ' {
+    debug.print("help (functionality.bas for Excel)")
+    debug.print "  createTestConstellation  ""   ' ""p:\ath\to\file"""
+    debug.print "  add_00ModuleLoader"
+    debug.print "  saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"
 end sub ' }
