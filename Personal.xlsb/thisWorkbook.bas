@@ -17,6 +17,7 @@ sub workbook_open() ' {
     set app = application
 
     application.onKey "^q"    , "copyCellWithoutNewLine"
+    application.onKey "^s"    , "save_"
     application.onKey "^{F11}", "addReferenceToPersonalXlsb" ' Default for ctrl+F11 is to open a «macro workbook», which apparently almost nobody uses anymore
 
 end sub ' }

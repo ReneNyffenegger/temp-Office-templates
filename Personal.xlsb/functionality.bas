@@ -218,7 +218,29 @@ end sub ' }
 
 sub hlp() ' {
     debug.print("help (functionality.bas for Excel)")
-    debug.print "  createTestConstellation  ""   ' ""p:\ath\to\file"""
+    debug.print "  createTestConstellation  """"   ' ""p:\ath\to\file"""
     debug.print "  add_00ModuleLoader"
     debug.print "  saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"
+end sub ' }
+
+sub save_() ' {
+    
+    if activeWorkbook.path = "" then
+       dim ret as variant
+       ret = application.getSaveAsFilename(initialFilename := environ("userprofile"), fileFilter := "xlsm, *.xlsm, xlsx, *.xlsx")
+
+       if ret <> false then
+
+          if     right(ret, 5) = ".xlsm" then
+                 activeWorkbook.saveAs ret, xlOpenXMLWorkbookMacroEnabled
+          elseif right(ret, 5) = ".xlsx" then
+                 activeWorkbook.saveAs ret, xlOpenXMLWorkbook
+          else
+                 msgBox ("Unknown extension")
+          end if
+       end if
+    else
+       activeWorkbook.save
+    end if
+
 end sub ' }
