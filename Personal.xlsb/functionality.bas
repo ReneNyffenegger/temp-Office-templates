@@ -216,11 +216,22 @@ sub saveAsXlsm(fileName as string) ' {
 
 end sub ' }
 
+sub clearUsedRange() ' {
+
+     with activeSheet.usedRange
+         .select
+         .clearFormats
+         .clearContents
+     end with
+
+end sub ' }
+
 sub hlp() ' {
     debug.print("help (functionality.bas for Excel)")
     debug.print "  createTestConstellation  """"   ' ""p:\ath\to\file"""
     debug.print "  add_00ModuleLoader"
     debug.print "  saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"
+    debug.print "  clearUsedRange                              | select usedRange (for verification), then call clearContents and clearFormats on activeSheet.usedRange"
 end sub ' }
 
 sub save_() ' {
