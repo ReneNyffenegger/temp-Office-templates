@@ -100,10 +100,16 @@ sub copyCellWithoutNewLine() ' {
 
 end sub ' }
 
-function addModule(optional subMain as boolean) as vbide.vbComponent ' {
+function addModule(optional subMain as boolean = false) as vbide.vbComponent ' {
  '
  '  Add a VBA module to the current project
  '
+    if application.VBE.activeVBProject.name = "Personal_xlsb" then ' {
+       debug.print "activeVBProject = Personal.xlsb"
+       exit function
+    end if ' }
+
+
     set addModule = application.VBE.activeVBProject.vbComponents.add(vbext_ct_StdModule)
 
     if subMain then ' {
@@ -226,12 +232,28 @@ sub clearUsedRange() ' {
 
 end sub ' }
 
+' sub showSheets(optional wb as workbook) ' {
+' 
+'     if wb is nothing then
+'        set wb = activeWorkbook
+'     end if
+' 
+'     dim sh as worksheet
+' 
+'     for each sh in wb.worksheets
+' 
+' 
+'     next xh
+' 
+' end sub ' }
+
 sub hlp() ' {
     debug.print("help (functionality.bas for Excel)")
     debug.print "  createTestConstellation  """"   ' ""p:\ath\to\file"""
     debug.print "  add_00ModuleLoader"
     debug.print "  saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"
     debug.print "  clearUsedRange                              | select usedRange (for verification), then call clearContents and clearFormats on activeSheet.usedRange"
+'   debug.print "  showSheets [wb]                             | show name of sheets in workbook indicated by wb. If wb is missing, use current workbook"
 end sub ' }
 
 sub save_() ' {
