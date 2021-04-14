@@ -249,6 +249,7 @@ end sub ' }
 
 sub hlp() ' {
     debug.print("help (functionality.bas for Excel)")
+    debug.print "  addModule true|false            ' true: with sub main"
     debug.print "  createTestConstellation  """"   ' ""p:\ath\to\file"""
     debug.print "  add_00ModuleLoader"
     debug.print "  saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"

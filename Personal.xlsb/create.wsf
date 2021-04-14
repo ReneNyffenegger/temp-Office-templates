@@ -17,9 +17,9 @@
    set xls = createOfficeApp("excel", path)
    set app = xls.application
 
-   call insertModule              (app, currentDir() & "functionality.bas", "functionality", 1)
-   call insertModule              (app, currentDir() & "VBA.bas"          , "WinAPI"       , 1)
-   call replaceThisWorksheetModule(app, currentDir() & "thisWorkbook.bas"                     )
+   call insertModule              (app, currentDir() & "functionality.vb", "functionality", 1)
+   call insertModule              (app, currentDir() & "VBA.vb"          , "WinAPI"       , 1)
+   call replaceThisWorksheetModule(app, currentDir() & "thisWorkbook.vb"                     )
 
    app.VBE.activeVBProject.name = "Personal_xlsb"
 
