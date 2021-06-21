@@ -10,16 +10,16 @@
    dim path
    path = wsh.environment("volatile")("appdata") & "\Microsoft\Excel\XLSTART\Personal.xlsb"
 
-   wscript.echo(path)
+   wscript.echo "Path of Excel template fie is: " & path
 
    dim app
    dim xls
    set xls = createOfficeApp("excel", path)
    set app = xls.application
 
-   call insertModule              (app, currentDir() & "functionality.vb", "functionality", 1)
-   call insertModule              (app, currentDir() & "VBA.vb"          , "WinAPI"       , 1)
-   call replaceThisWorksheetModule(app, currentDir() & "thisWorkbook.vb"                     )
+   insertModule              app, currentDir() & "functionality.vb", "functionality", 1
+   insertModule              app, currentDir() & "VBA.vb"          , "WinAPI"       , 1
+   replaceThisWorkbookModule app, currentDir() & "thisWorkbook.vb"
 
    app.VBE.activeVBProject.name = "Personal_xlsb"
 

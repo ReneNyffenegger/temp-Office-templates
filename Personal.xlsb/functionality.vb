@@ -248,12 +248,12 @@ end sub ' }
 ' end sub ' }
 
 sub hlp() ' {
-    debug.print("help (functionality.bas for Excel)")
-    debug.print "  addModule true|false            ' true: with sub main"
+    debug.print("help (functionality.vb for Excel)")
+    debug.print "  addModule true|false          ' true: with sub main"
     debug.print "  createTestConstellation  """"   ' ""p:\ath\to\file"""
     debug.print "  add_00ModuleLoader"
-    debug.print "  saveAsXlsm ""filename""                     | save activeWorkbook in xlsm format"
-    debug.print "  clearUsedRange                              | select usedRange (for verification), then call clearContents and clearFormats on activeSheet.usedRange"
+    debug.print "  saveAsXlsm ""filename""                     ' save activeWorkbook in xlsm format"
+    debug.print "  clearUsedRange                            ' select usedRange (for verification), then call clearContents and clearFormats on activeSheet.usedRange"
 '   debug.print "  showSheets [wb]                             | show name of sheets in workbook indicated by wb. If wb is missing, use current workbook"
 end sub ' }
 
